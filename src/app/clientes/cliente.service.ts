@@ -22,6 +22,12 @@ export class ClienteService {
     return this.http.get(this.urlEndPoint).pipe(
       map( (response) => response as Cliente[])
     );
+    
+
+    // create(cliente: Cliente) : Observable<Cliente>{
+    //   map( (response) => response as Cliente[])
+
+    // }
 
 
     
