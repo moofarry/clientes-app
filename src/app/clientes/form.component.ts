@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Cliente } from './cliente';
 import { ClienteService } from './cliente.service';
+
+
 
 
 @Component({
@@ -10,9 +13,9 @@ import { ClienteService } from './cliente.service';
 })
 export class FormComponent implements OnInit {
   
-  public titulo: string = "Crear Cliente";  //---> private?
-  public cliente: Cliente = new Cliente;
-  
+  titulo: string = "Crear Cliente";  //---> private?
+  cliente: Cliente = new Cliente;
+
   constructor( private clienteService: ClienteService,
     private router: Router) { }
 
@@ -21,8 +24,14 @@ export class FormComponent implements OnInit {
 
   public create(): void{
     this.clienteService.create(this.cliente).subscribe(
-      response => this.router.navigate(['/clientes'])
+      response => {
+        this.router.navigate(['/clientes'])
+        Swal.fire('Nuevo Cliente',`Cliente ${this.cliente.nombre} creado con éxito!`, 'success');
+      }
+
     )
   }
+
+  
 
 }
