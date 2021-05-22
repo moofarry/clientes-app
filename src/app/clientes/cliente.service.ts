@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CLIENTES } from './clientes.json';
 import { Cliente } from './cliente';
-import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+
 
 @Injectable()
 export class ClienteService {
@@ -11,7 +13,8 @@ export class ClienteService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private router: Router) { }
 
   getClientes(): Observable<Cliente[]> {
     //return of(CLIENTES);
@@ -30,7 +33,18 @@ export class ClienteService {
   }
 
   getCliente(id: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`);
+    return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
+      catchError(e => {
+        this.router.navigate(['/cliente']);
+        console.error(e.error.mensaje);
+        Swal.fire({
+          icon: 'error',
+          title: 'Eror al editar',
+          text: `El cliente ID: ${id} no existe en la base de datos`
+        });
+        return throwError(e);
+      })
+    );
   }
 
   update(cliente: Cliente): Observable<Cliente> {

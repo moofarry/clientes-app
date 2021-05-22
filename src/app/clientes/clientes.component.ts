@@ -55,7 +55,7 @@ export class ClientesComponent implements OnInit {
       ) {
         swalWithBootstrapButtons.fire(
           'Cancelado',
-          'Your imaginary file is safe :)',
+          'Procedimiento cancelado',
           'error'
         )
       }
