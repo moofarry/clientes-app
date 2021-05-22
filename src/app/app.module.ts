@@ -13,13 +13,14 @@ import { FormComponent } from './clientes/form.component';
 import { FormsModule } from '@angular/forms';
 
 
+
 const routes: Routes = [
   {path: '', redirectTo: '/clientes', pathMatch: 'full'},
   {path: 'directivas', component: DirectivaComponent},
   {path: 'clientes', component: ClientesComponent},
   {path: 'clientes/form', component: FormComponent},
-
-]
+  {path: 'clientes/form/:id', component: FormComponent}
+];
 
 @NgModule({
   declarations: [
@@ -28,16 +29,13 @@ const routes: Routes = [
     FooterComponent,
     DirectivaComponent,
     ClientesComponent,
-    FormComponent,
-    
+    FormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes),
-
-    
+    RouterModule.forRoot(routes)
   ],
   providers: [ClienteService],
   bootstrap: [AppComponent]

@@ -1,21 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-directiva',
   templateUrl: './directiva.component.html',
 })
-export class DirectivaComponent  {
+export class DirectivaComponent {
+  listaCurso: string[] = ['TypeScript', 'JavaScript', 'Java SE', 'C#', 'PHP'];
 
-  listaCurso: string[] = ['Typescript', 'Javascript', 'Java SE', 'Angular'];
-  
   habilitar: boolean = true;
-  
+
+  constructor() {}
+
   setHabilitar(): void {
-    this.habilitar = (this.habilitar == true) ? false: true;
-  }  
-  constructor() { }
-
-
-
-
+    this.habilitar = this.habilitar == true ? false : true;
+  }
 }
