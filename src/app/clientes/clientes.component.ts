@@ -16,6 +16,7 @@ export class ClientesComponent implements OnInit {
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit() {
+
     this.clienteService.getClientes().pipe(
       tap(clientes => {
         console.log('ClientesComponent: tap 3');
@@ -24,6 +25,7 @@ export class ClientesComponent implements OnInit {
         });
       })
     ).subscribe(clientes => this.clientes = clientes);
+    
   }
 
   delete(cliente: Cliente): void {
